@@ -43,7 +43,7 @@ export default function Home() {
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <p className="mb-6 font-mono text-[0.65rem] font-medium uppercase tracking-[0.45em] text-sky-300/90">
-          Roman · Science-fiction
+          Science · Politique · Fiction
         </p>
 
         <h1
