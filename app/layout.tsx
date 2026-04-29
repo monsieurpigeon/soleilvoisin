@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Soleil Voisin",
   description:
-    "Roman de science-fiction — une vision rare, une voix qui rassemble lectrices et lecteurs.",
+    "Roman de science-politique-fiction",
 };
 
 export default function RootLayout({
