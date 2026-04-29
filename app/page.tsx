@@ -1,65 +1,76 @@
-import Image from "next/image";
+import { Syne } from "next/font/google";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+});
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 py-16">
+      {/* Fond cosmos */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-20%,rgba(56,189,248,0.12),transparent_55%),radial-gradient(ellipse_90%_70%_at_100%_100%,rgba(251,191,36,0.08),transparent_50%),linear-gradient(180deg,#030510_0%,#0a0f1e_45%,#030510_100%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage: `
+            radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.45), transparent),
+            radial-gradient(1px 1px at 25% 65%, rgba(255,255,255,0.25), transparent),
+            radial-gradient(1px 1px at 78% 12%, rgba(255,255,255,0.35), transparent),
+            radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.2), transparent),
+            radial-gradient(1px 1px at 40% 88%, rgba(255,255,255,0.3), transparent),
+            radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,0.15), transparent),
+            radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.22), transparent),
+            radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.18), transparent)
+          `,
+        }}
+        aria-hidden
+      />
+      {/* Halo « soleil » */}
+      <div
+        className="pointer-events-none absolute -bottom-32 left-1/2 h-[min(70vw,520px)] w-[min(95vw,900px)] -translate-x-1/2 rounded-full bg-gradient-to-t from-amber-500/25 via-orange-400/15 to-transparent blur-3xl"
+        style={{ animation: "soleil-breathe 10s ease-in-out infinite" }}
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute left-[8%] top-[18%] h-64 w-64 rounded-full bg-amber-400/20 blur-[100px]"
+        style={{ animation: "soleil-breathe 12s ease-in-out infinite 1s" }}
+        aria-hidden
+      />
+
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
+        <p className="mb-6 font-mono text-[0.65rem] font-medium uppercase tracking-[0.45em] text-sky-300/90">
+          Roman · Science-fiction
+        </p>
+
+        <h1
+          className={`${syne.className} bg-gradient-to-br from-amber-100 via-white to-amber-200/90 bg-clip-text text-5xl font-extrabold leading-[1.05] tracking-tight text-transparent drop-shadow-[0_0_40px_rgba(251,191,36,0.25)] sm:text-6xl sm:leading-[1.02] md:text-7xl md:leading-none lg:text-8xl`}
+          style={{
+            backgroundSize: "200% 200%",
+            animation: "soleil-shimmer 14s ease-in-out infinite",
+          }}
+        >
+          Soleil Voisin
+        </h1>
+
+        <div className="mx-auto mt-10 h-px max-w-xs bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+
+        <p className="mx-auto mt-10 max-w-lg text-lg leading-relaxed text-zinc-400 sm:text-xl">
+          On laisse Mars aux américains, <br />
+          <span className="text-zinc-200">les bons petits français</span> <br />
+          iront sur l’Alpha du Centaure.
+        </p>
+
+        <p
+          className="mt-14 font-mono text-xs uppercase tracking-[0.35em] text-zinc-600"
+          style={{ animation: "float-dust 5s ease-in-out infinite alternate" }}
+        >
+          Bientôt dans les librairies
+        </p>
+      </div>
+    </main>
   );
 }
