@@ -7,7 +7,10 @@ const syne = Syne({
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 py-16">
+    <main
+      id="contenu-principal"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 py-16"
+    >
       {/* Fond cosmos */}
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-20%,rgba(56,189,248,0.12),transparent_55%),radial-gradient(ellipse_90%_70%_at_100%_100%,rgba(251,191,36,0.08),transparent_50%),linear-gradient(180deg,#030510_0%,#0a0f1e_45%,#030510_100%)]"
@@ -53,7 +56,7 @@ export default function Home() {
             animation: "soleil-shimmer 14s ease-in-out infinite",
           }}
         >
-          Soleil Voisin
+          Soleil<br />Voisin
         </h1>
 
         <div className="mx-auto mt-10 h-px max-w-xs bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
@@ -65,7 +68,7 @@ export default function Home() {
         </p>
 
         <p
-          className="mt-14 font-mono text-xs uppercase tracking-[0.35em] text-zinc-600"
+          className="mt-14 font-mono text-xs uppercase tracking-[0.35em] text-zinc-400"
           style={{ animation: "float-dust 5s ease-in-out infinite alternate" }}
         >
           Bientôt dans les librairies
