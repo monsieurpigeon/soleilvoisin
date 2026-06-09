@@ -1,7 +1,7 @@
 import { BOOK_PDF_FILE_ID } from "@/lib/book/constants";
 
 /** Durée de cache du fichier PDF côté serveur / navigateur (secondes). */
-export const BOOK_PDF_CACHE_SECONDS = 300;
+export const BOOK_PDF_CACHE_SECONDS = 3600;
 
 /** Intervalle entre deux vérifications de version côté client (secondes). */
 export const BOOK_PDF_VERSION_CHECK_SECONDS = 60;

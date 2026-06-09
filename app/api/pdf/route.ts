@@ -18,10 +18,13 @@ export async function GET() {
     return new Response("Impossible de charger le PDF.", { status: 502 });
   }
 
+  const contentLength = response.headers.get("content-length");
+
   return new Response(response.body, {
     headers: {
       "Content-Type": "application/pdf",
       "Cache-Control": pdfResponseCacheControl(),
+      ...(contentLength ? { "Content-Length": contentLength } : {}),
     },
   });
 }

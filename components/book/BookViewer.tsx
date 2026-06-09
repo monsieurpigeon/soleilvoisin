@@ -159,13 +159,12 @@ function BookPage({
           type="button"
           onClick={() => onZoom(pageNumber)}
           aria-label={`Agrandir la page ${pageNumber}`}
-          className={`flex h-full w-full cursor-pointer items-center ${
-            spineAlign === "end"
+          className={`flex h-full w-full cursor-pointer items-center ${spineAlign === "end"
               ? "justify-end"
               : spineAlign === "start"
                 ? "justify-start"
                 : "justify-center"
-          } transition hover:brightness-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50`}
+            } transition hover:brightness-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50`}
         >
           <canvas
             ref={canvasRef}
@@ -601,14 +600,14 @@ function PageZoomOverlay({
           tabIndex={0}
           aria-label="Clic gauche page précédente, clic droit page suivante"
           className={`relative flex h-full w-full items-stretch justify-center ${showMagnifier
-              ? "cursor-none"
-              : isTransitioning
-                ? "cursor-default"
-                : clickZone === "left" && canGoPrev
-                  ? "cursor-w-resize"
-                  : clickZone === "right" && canGoNext
-                    ? "cursor-e-resize"
-                    : "cursor-default"
+            ? "cursor-none"
+            : isTransitioning
+              ? "cursor-default"
+              : clickZone === "left" && canGoPrev
+                ? "cursor-w-resize"
+                : clickZone === "right" && canGoNext
+                  ? "cursor-e-resize"
+                  : "cursor-default"
             }`}
           onClick={handlePageClick}
           onMouseEnter={() => setIsReadingHover(true)}
@@ -729,14 +728,45 @@ function PageZoomOverlay({
   );
 }
 
+const BOOK_OPENING_DURATION_MS = 20_000;
+
 export function BookViewer() {
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null);
   const [pdfVersion, setPdfVersion] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [spreadIndex, setSpreadIndex] = useState(0);
   const [zoomedPage, setZoomedPage] = useState<number | null>(null);
+  const [loadProgress, setLoadProgress] = useState(0);
   const cacheRef = useRef(new Map<string, string>());
   const pdfVersionRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const start = Date.now();
+    let frame = 0;
+
+    const tick = () => {
+      if (cancelled) return;
+
+      const elapsed = Date.now() - start;
+      const progress = Math.min(
+        100,
+        Math.round((elapsed / BOOK_OPENING_DURATION_MS) * 100),
+      );
+      setLoadProgress(progress);
+
+      if (progress < 100) {
+        frame = window.requestAnimationFrame(tick);
+      }
+    };
+
+    frame = window.requestAnimationFrame(tick);
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const loadPdfDocument = useCallback(async (version: string) => {
     const doc = await getDocument({ url: getBookPdfUrl(version) }).promise;
@@ -856,11 +886,22 @@ export function BookViewer() {
     );
   }
 
-  if (!pdf || !pdfVersion || !currentSpread) {
+  if (!pdf || !pdfVersion || !currentSpread || loadProgress < 100) {
     return (
-      <div className="flex min-h-[40svh] items-center justify-center">
+      <div className="flex min-h-[40svh] flex-col items-center justify-center gap-5 px-6">
         <p className="animate-pulse font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
           Ouverture du livre…
+        </p>
+        <div className="w-full max-w-xs" aria-hidden>
+          <div className="h-1 overflow-hidden rounded-full bg-zinc-800/90">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-amber-500/80 to-amber-300/90 transition-[width] duration-150 ease-linear"
+              style={{ width: `${loadProgress}%` }}
+            />
+          </div>
+        </div>
+        <p className="sr-only" aria-live="polite">
+          Chargement {loadProgress} %
         </p>
       </div>
     );
