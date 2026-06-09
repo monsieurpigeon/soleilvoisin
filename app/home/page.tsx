@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Syne } from "next/font/google";
-import type { Metadata } from "next";
 import { BookReaderSection } from "@/components/home/BookReaderSection";
 import { OG_IMAGE, SITE_NAME } from "@/lib/site";
+import type { Metadata } from "next";
+import { Syne } from "next/font/google";
+import Link from "next/link";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -10,15 +10,15 @@ const syne = Syne({
 });
 
 const PAGE_TITLE =
-  "Soleil Voisin — Roman SF en ligne | Vers Alpha du Centaure";
+  "Soleil Voisin — Roman SF en ligne | Alpha du Centaure";
 
 const META_DESCRIPTION =
-  "Roman de science-politique-fiction : embarquez vers Alpha du Centaure. Lisez Soleil Voisin en ligne dans un lecteur immersif, en doubles pages, gratuitement.";
+  "Roman de science-politique-fiction : embarquez vers Alpha du Centaure. Lisez Soleil Voisin en ligne gratuitement.";
 
-const OG_TITLE = "Soleil Voisin — Lisez le roman vers Alpha du Centaure";
+const OG_TITLE = "Soleil Voisin — De la SF bien française.";
 
 const OG_DESCRIPTION =
-  "Science-politique-fiction : les Français visent Alpha du Centaure. Ouvrez le livre en ligne et tournez les pages du roman Soleil Voisin.";
+  "Roman de science-politique-fiction : embarquez vers Alpha du Centaure. Lisez Soleil Voisin en ligne gratuitement.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
