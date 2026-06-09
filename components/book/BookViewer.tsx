@@ -203,7 +203,7 @@ type ZoomPhase =
   | "exit-backward"
   | "idle";
 
-const MAGNIFIER_BASE_WIDTH = 350;
+const MAGNIFIER_BASE_WIDTH = 500;
 const MAGNIFIER_BASE_HEIGHT = 140;
 const MAGNIFIER_MAX_WIDTH = 500;
 const MAGNIFIER_MAX_HEIGHT = 194;
@@ -586,8 +586,7 @@ function PageZoomOverlay({
           role="button"
           tabIndex={0}
           aria-label="Clic gauche page précédente, clic droit page suivante"
-          className={`relative flex h-full w-full items-stretch justify-center ${
-            showMagnifier
+          className={`relative flex h-full w-full items-stretch justify-center ${showMagnifier
               ? "cursor-none"
               : isTransitioning
                 ? "cursor-default"
@@ -596,7 +595,7 @@ function PageZoomOverlay({
                   : clickZone === "right" && canGoNext
                     ? "cursor-e-resize"
                     : "cursor-default"
-          }`}
+            }`}
           onClick={handlePageClick}
           onMouseEnter={() => setIsReadingHover(true)}
           onMouseMove={(event) => {
