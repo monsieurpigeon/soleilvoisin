@@ -122,14 +122,38 @@ button:focus-visible {
     filter: blur(10px) hue-rotate(25deg)
       drop-shadow(-30px 0 50px rgba(56, 189, 248, 0.35));
   }
-  35% {
+  28% {
     clip-path: inset(0 0 0 0);
-    filter: blur(3px) hue-rotate(8deg)
-      drop-shadow(0 0 45px rgba(251, 191, 36, 0.45));
+    opacity: 0.82;
+    transform: perspective(1500px) rotateY(-32deg) rotateZ(2.5deg) translateX(10%)
+      scale(0.9);
+    filter: blur(4px) hue-rotate(12deg)
+      drop-shadow(0 0 40px rgba(251, 191, 36, 0.4));
   }
-  65% {
-    transform: perspective(1500px) rotateY(7deg) rotateZ(-1deg) translateX(-3%)
-      scale(1.025);
+  52% {
+    opacity: 0.96;
+    transform: perspective(1500px) rotateY(-8deg) rotateZ(0.6deg) translateX(2%)
+      scale(0.985);
+    filter: blur(1.5px) hue-rotate(3deg)
+      drop-shadow(0 0 24px rgba(251, 191, 36, 0.22));
+  }
+  72% {
+    opacity: 1;
+    transform: perspective(1500px) rotateY(-2deg) rotateZ(0.15deg) translateX(0.4%)
+      scale(1.004);
+    filter: blur(0.4px) hue-rotate(0.5deg)
+      drop-shadow(0 0 12px rgba(251, 191, 36, 0.1));
+  }
+  86% {
+    transform: perspective(1500px) rotateY(-0.5deg) rotateZ(0.04deg) translateX(0.08%)
+      scale(1.001);
+    filter: blur(0) hue-rotate(0deg)
+      drop-shadow(0 0 4px rgba(251, 191, 36, 0.04));
+  }
+  94% {
+    transform: perspective(1500px) rotateY(-0.12deg) rotateZ(0) translateX(0.02%)
+      scale(1.0002);
+    filter: blur(0) hue-rotate(0deg) drop-shadow(0 0 0 transparent);
   }
   100% {
     opacity: 1;
@@ -149,14 +173,38 @@ button:focus-visible {
     filter: blur(10px) hue-rotate(-20deg)
       drop-shadow(30px 0 50px rgba(251, 191, 36, 0.4));
   }
-  35% {
+  28% {
     clip-path: inset(0 0 0 0);
-    filter: blur(3px) hue-rotate(-6deg)
-      drop-shadow(0 0 45px rgba(56, 189, 248, 0.35));
+    opacity: 0.82;
+    transform: perspective(1500px) rotateY(32deg) rotateZ(-2.5deg) translateX(-10%)
+      scale(0.9);
+    filter: blur(4px) hue-rotate(-12deg)
+      drop-shadow(0 0 40px rgba(56, 189, 248, 0.35));
   }
-  65% {
-    transform: perspective(1500px) rotateY(-7deg) rotateZ(1deg) translateX(3%)
-      scale(1.025);
+  52% {
+    opacity: 0.96;
+    transform: perspective(1500px) rotateY(8deg) rotateZ(-0.6deg) translateX(-2%)
+      scale(0.985);
+    filter: blur(1.5px) hue-rotate(-3deg)
+      drop-shadow(0 0 24px rgba(56, 189, 248, 0.2));
+  }
+  72% {
+    opacity: 1;
+    transform: perspective(1500px) rotateY(2deg) rotateZ(-0.15deg) translateX(-0.4%)
+      scale(1.004);
+    filter: blur(0.4px) hue-rotate(-0.5deg)
+      drop-shadow(0 0 12px rgba(56, 189, 248, 0.1));
+  }
+  86% {
+    transform: perspective(1500px) rotateY(0.5deg) rotateZ(-0.04deg) translateX(-0.08%)
+      scale(1.001);
+    filter: blur(0) hue-rotate(0deg)
+      drop-shadow(0 0 4px rgba(56, 189, 248, 0.04));
+  }
+  94% {
+    transform: perspective(1500px) rotateY(0.12deg) rotateZ(0) translateX(-0.02%)
+      scale(1.0002);
+    filter: blur(0) hue-rotate(0deg) drop-shadow(0 0 0 transparent);
   }
   100% {
     opacity: 1;
@@ -225,11 +273,11 @@ button:focus-visible {
 }
 
 .zoom-enter-forward {
-  animation: zoom-enter-forward 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: zoom-enter-forward 720ms cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .zoom-enter-backward {
-  animation: zoom-enter-backward 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: zoom-enter-backward 720ms cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .zoom-exit-forward {
