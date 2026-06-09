@@ -57,9 +57,17 @@ type BookPageProps = {
   pdfVersion: string;
   onZoom: (pageNumber: number) => void;
   cache: Map<string, string>;
+  spineAlign?: "start" | "end";
 };
 
-function BookPage({ pageNumber, pdf, pdfVersion, onZoom, cache }: BookPageProps) {
+function BookPage({
+  pageNumber,
+  pdf,
+  pdfVersion,
+  onZoom,
+  cache,
+  spineAlign,
+}: BookPageProps) {
   const cellRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [rendering, setRendering] = useState(false);
@@ -151,11 +159,17 @@ function BookPage({ pageNumber, pdf, pdfVersion, onZoom, cache }: BookPageProps)
           type="button"
           onClick={() => onZoom(pageNumber)}
           aria-label={`Agrandir la page ${pageNumber}`}
-          className="flex h-full w-full cursor-pointer items-center justify-center p-2 transition hover:brightness-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
+          className={`flex h-full w-full cursor-pointer items-center ${
+            spineAlign === "end"
+              ? "justify-end"
+              : spineAlign === "start"
+                ? "justify-start"
+                : "justify-center"
+          } transition hover:brightness-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50`}
         >
           <canvas
             ref={canvasRef}
-            className={`max-h-full max-w-full object-contain bg-[#f4efe6] shadow-sm ${rendering ? "opacity-40" : "opacity-100"} transition-opacity`}
+            className={`max-h-full max-w-full object-contain bg-[#f4efe6] ${rendering ? "opacity-40" : "opacity-100"} transition-opacity`}
           />
         </button>
       ) : null}
@@ -881,11 +895,7 @@ export function BookViewer() {
               pdfVersion={pdfVersion}
               onZoom={setZoomedPage}
               cache={cacheRef.current}
-            />
-
-            <div
-              className="w-px shrink-0 bg-gradient-to-b from-zinc-800/20 via-zinc-700/50 to-zinc-800/20"
-              aria-hidden
+              spineAlign="end"
             />
 
             <BookPage
@@ -894,6 +904,7 @@ export function BookViewer() {
               pdfVersion={pdfVersion}
               onZoom={setZoomedPage}
               cache={cacheRef.current}
+              spineAlign="start"
             />
           </div>
         </div>
