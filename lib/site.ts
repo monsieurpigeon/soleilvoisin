@@ -1,5 +1,14 @@
 export const SITE_NAME = "Soleil Voisin";
 
+export const OG_IMAGE_PATH = "/og-image.png";
+
+export const OG_IMAGE = {
+  url: OG_IMAGE_PATH,
+  width: 1200,
+  height: 630,
+  alt: "Soleil Voisin — Roman de science-politique-fiction vers Alpha du Centaure",
+} as const;
+
 export function getSiteUrl(): URL {
   if (process.env.NEXT_PUBLIC_SITE_URL) {
     return new URL(process.env.NEXT_PUBLIC_SITE_URL);

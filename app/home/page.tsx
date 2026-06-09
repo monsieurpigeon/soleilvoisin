@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Syne } from "next/font/google";
 import type { Metadata } from "next";
 import { BookReaderSection } from "@/components/home/BookReaderSection";
-import { SITE_NAME } from "@/lib/site";
+import { OG_IMAGE, SITE_NAME } from "@/lib/site";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -33,20 +33,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: "fr_FR",
     type: "website",
-    images: [
-      {
-        url: "/home/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "Soleil Voisin — Roman de science-politique-fiction vers Alpha du Centaure",
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: OG_TITLE,
     description: OG_DESCRIPTION,
-    images: ["/home/twitter-image"],
+    images: [OG_IMAGE.url],
   },
 };
 
