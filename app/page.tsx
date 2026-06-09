@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Syne } from "next/font/google";
 
 const syne = Syne({
@@ -67,12 +68,21 @@ export default function Home() {
           iront sur l’Alpha du Centaure.
         </p>
 
-        <p
-          className="mt-14 font-mono text-xs uppercase tracking-[0.35em] text-zinc-400"
-          style={{ animation: "float-dust 5s ease-in-out infinite alternate" }}
-        >
-          Bientôt dans les librairies
-        </p>
+        <div className="mt-14 flex flex-col items-center gap-6">
+          <p
+            className="font-mono text-xs uppercase tracking-[0.35em] text-zinc-400"
+            style={{ animation: "float-dust 5s ease-in-out infinite alternate" }}
+          >
+            Bientôt dans les librairies
+          </p>
+
+          <Link
+            href="/home"
+            className="inline-flex items-center justify-center rounded-full border border-amber-400/40 bg-amber-500/10 px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-amber-100 shadow-[0_0_30px_rgba(251,191,36,0.15)] transition hover:border-amber-300/60 hover:bg-amber-500/20 hover:shadow-[0_0_40px_rgba(251,191,36,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030510]"
+          >
+            Accéder au site
+          </Link>
+        </div>
       </div>
     </main>
   );
