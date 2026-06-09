@@ -1,6 +1,7 @@
 "use client";
 
-import { BOOK_PDF_API_URL, BOOK_PDF_DRIVE_URL } from "@/lib/book/constants";
+import { BOOK_PDF_DRIVE_URL, BOOK_PDF_META_URL } from "@/lib/book/constants";
+import { getBookPdfUrl } from "@/lib/book/pdf-cache";
 import {
   getDocument,
   GlobalWorkerOptions,
@@ -53,11 +54,12 @@ function spreadLabel(spread: Spread): string {
 type BookPageProps = {
   pageNumber: number | null;
   pdf: PDFDocumentProxy;
+  pdfVersion: string;
   onZoom: (pageNumber: number) => void;
   cache: Map<string, string>;
 };
 
-function BookPage({ pageNumber, pdf, onZoom, cache }: BookPageProps) {
+function BookPage({ pageNumber, pdf, pdfVersion, onZoom, cache }: BookPageProps) {
   const cellRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [rendering, setRendering] = useState(false);
@@ -76,7 +78,7 @@ function BookPage({ pageNumber, pdf, onZoom, cache }: BookPageProps) {
       const maxHeight = cell.clientHeight;
       if (maxWidth <= 0 || maxHeight <= 0) return;
 
-      const cacheKey = `${pageNumber}-${maxWidth}x${maxHeight}`;
+      const cacheKey = `${pdfVersion}-${pageNumber}-${maxWidth}x${maxHeight}`;
       const cached = cache.get(cacheKey);
       if (cached) {
         const img = new Image();
@@ -137,7 +139,7 @@ function BookPage({ pageNumber, pdf, onZoom, cache }: BookPageProps) {
       cancelled = true;
       observer.disconnect();
     };
-  }, [pageNumber, pdf, cache]);
+  }, [pageNumber, pdf, pdfVersion, cache]);
 
   return (
     <div
@@ -251,6 +253,7 @@ type PageZoomOverlayProps = {
   pageNumber: number;
   totalPages: number;
   pdf: PDFDocumentProxy;
+  pdfVersion: string;
   onClose: (page: number) => void;
   onPageChange: (page: number) => void;
   cache: Map<string, string>;
@@ -264,6 +267,7 @@ function PageZoomOverlay({
   pageNumber,
   totalPages,
   pdf,
+  pdfVersion,
   onClose,
   onPageChange,
   cache,
@@ -475,7 +479,7 @@ function PageZoomOverlay({
 
       const maxHeight = window.innerHeight;
       const maxWidth = window.innerWidth;
-      const cacheKey = `${displayPage}-zoom-${maxWidth}x${maxHeight}`;
+      const cacheKey = `${pdfVersion}-${displayPage}-zoom-${maxWidth}x${maxHeight}`;
 
       const cached = cache.get(cacheKey);
       if (cached && canvasRef.current) {
@@ -533,7 +537,7 @@ function PageZoomOverlay({
       cancelled = true;
       window.removeEventListener("resize", renderPage);
     };
-  }, [displayPage, pdf, cache]);
+  }, [displayPage, pdf, pdfVersion, cache]);
 
   useEffect(() => {
     if (
@@ -714,18 +718,35 @@ function PageZoomOverlay({
 
 export function BookViewer() {
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null);
+  const [pdfVersion, setPdfVersion] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [spreadIndex, setSpreadIndex] = useState(0);
   const [zoomedPage, setZoomedPage] = useState<number | null>(null);
   const cacheRef = useRef(new Map<string, string>());
+  const pdfVersionRef = useRef<string | null>(null);
+
+  const loadPdfDocument = useCallback(async (version: string) => {
+    const doc = await getDocument({ url: getBookPdfUrl(version) }).promise;
+    cacheRef.current.clear();
+    pdfVersionRef.current = version;
+    setPdfVersion(version);
+    setPdf(doc);
+    setError(null);
+    return doc;
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadPdf() {
+    async function bootstrap() {
       try {
-        const doc = await getDocument({ url: BOOK_PDF_API_URL }).promise;
-        if (!cancelled) setPdf(doc);
+        const metaResponse = await fetch(BOOK_PDF_META_URL, { cache: "no-store" });
+        if (!metaResponse.ok) throw new Error("meta");
+
+        const { version } = (await metaResponse.json()) as { version: string };
+        if (cancelled) return;
+
+        await loadPdfDocument(version);
       } catch {
         if (!cancelled) {
           setError(
@@ -735,12 +756,37 @@ export function BookViewer() {
       }
     }
 
-    void loadPdf();
+    void bootstrap();
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [loadPdfDocument]);
+
+  useEffect(() => {
+    async function checkForUpdate() {
+      if (document.visibilityState !== "visible") return;
+
+      try {
+        const metaResponse = await fetch(BOOK_PDF_META_URL, { cache: "no-store" });
+        if (!metaResponse.ok) return;
+
+        const { version } = (await metaResponse.json()) as { version: string };
+        if (version === pdfVersionRef.current) return;
+
+        await loadPdfDocument(version);
+      } catch {
+        // Ignore background refresh errors.
+      }
+    }
+
+    function onVisibilityChange() {
+      void checkForUpdate();
+    }
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, [loadPdfDocument]);
 
   const spreads = pdf ? getSpreads(pdf.numPages) : [];
   const currentSpread = spreads[spreadIndex];
@@ -797,7 +843,7 @@ export function BookViewer() {
     );
   }
 
-  if (!pdf || !currentSpread) {
+  if (!pdf || !pdfVersion || !currentSpread) {
     return (
       <div className="flex min-h-[40svh] items-center justify-center">
         <p className="animate-pulse font-mono text-xs uppercase tracking-[0.35em] text-zinc-500">
@@ -833,6 +879,7 @@ export function BookViewer() {
             <BookPage
               pageNumber={currentSpread.left}
               pdf={pdf}
+              pdfVersion={pdfVersion}
               onZoom={setZoomedPage}
               cache={cacheRef.current}
             />
@@ -845,6 +892,7 @@ export function BookViewer() {
             <BookPage
               pageNumber={currentSpread.right}
               pdf={pdf}
+              pdfVersion={pdfVersion}
               onZoom={setZoomedPage}
               cache={cacheRef.current}
             />
@@ -888,6 +936,7 @@ export function BookViewer() {
           pageNumber={zoomedPage}
           totalPages={pdf.numPages}
           pdf={pdf}
+          pdfVersion={pdfVersion}
           onClose={handleCloseZoom}
           onPageChange={setZoomedPage}
           cache={cacheRef.current}

@@ -1,4 +1,8 @@
 import { BOOK_PDF_FILE_ID } from "@/lib/book/constants";
+import {
+  BOOK_PDF_CACHE_SECONDS,
+  pdfResponseCacheControl,
+} from "@/lib/book/pdf-cache";
 
 export const runtime = "nodejs";
 
@@ -7,7 +11,7 @@ export async function GET() {
 
   const response = await fetch(driveUrl, {
     redirect: "follow",
-    next: { revalidate: 3600 },
+    next: { revalidate: BOOK_PDF_CACHE_SECONDS },
   });
 
   if (!response.ok || !response.body) {
@@ -17,7 +21,7 @@ export async function GET() {
   return new Response(response.body, {
     headers: {
       "Content-Type": "application/pdf",
-      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+      "Cache-Control": pdfResponseCacheControl(),
     },
   });
 }

@@ -2,7 +2,6 @@ import { BookReaderSection } from "@/components/home/BookReaderSection";
 import { OG_IMAGE, SITE_NAME } from "@/lib/site";
 import type { Metadata } from "next";
 import { Syne } from "next/font/google";
-import Link from "next/link";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -56,16 +55,7 @@ export default function HomePage() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-5 pb-8 sm:gap-6 sm:pb-12">
         <header className="shrink-0 text-center">
-          <Link
-            href="/"
-            className="mb-6 inline-block cursor-pointer font-mono text-[0.65rem] font-medium uppercase tracking-[0.35em] text-sky-300/80 transition hover:text-sky-200"
-          >
-            ← Retour
-          </Link>
 
-          <p className="font-mono text-[0.65rem] font-medium uppercase tracking-[0.45em] text-sky-300/90">
-            Bienvenue
-          </p>
 
           <h1
             className={`${syne.className} mt-4 bg-gradient-to-br from-amber-100 via-white to-amber-200/90 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl`}
