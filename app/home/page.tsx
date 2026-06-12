@@ -84,6 +84,9 @@ export default function HomePage() {
           >
             Soleil Voisin
           </p>
+          <p className="mt-2 text-center font-mono text-xs uppercase tracking-[0.25em] text-zinc-500 sm:text-left">
+            Monsieur Pigeon
+          </p>
 
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-zinc-400 sm:text-base">
             {HOME_SYNOPSIS.map((paragraph) => (
