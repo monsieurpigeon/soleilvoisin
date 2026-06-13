@@ -1,8 +1,8 @@
 import { BookReaderSection } from "@/components/home/BookReaderSection";
 import { OG_IMAGE, SITE_NAME } from "@/lib/site";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Syne } from "next/font/google";
+import Link from "next/link";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -59,8 +59,15 @@ export default function LecturePage() {
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">
-            Doubles pages, zoom plein écran et loupe au survol.
+            Lisez gratuitement Soleil Voisin en ligne.
           </p>
+
+          <a
+            href="/shop"
+            className="mt-6 inline-flex cursor-pointer items-center justify-center rounded-full border border-amber-400/40 bg-amber-500/10 px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-100 shadow-[0_0_30px_rgba(251,191,36,0.12)] transition hover:border-amber-300/60 hover:bg-amber-500/20"
+          >
+            Boutique
+          </a>
         </header>
 
         <section

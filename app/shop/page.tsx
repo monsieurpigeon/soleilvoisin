@@ -1,6 +1,7 @@
 import {
   BOOK_SHOP_DESCRIPTION,
   SINGLE_BOOK_OFFER,
+  STRIPE_BOOK_CHECKOUT_URL,
 } from "@/lib/book/creem";
 import { textWithMonsieurPigeonLink } from "@/components/MonsieurPigeonLink";
 import { OG_IMAGE, SITE_NAME } from "@/lib/site";
@@ -98,19 +99,27 @@ export default function ShopPage() {
               </p>
 
               <div className="mt-6 flex w-full flex-col items-stretch gap-3">
-                <span
-                  aria-disabled="true"
-                  className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full border border-zinc-700/60 bg-zinc-900/50 px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500"
+                <a
+                  href={STRIPE_BOOK_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full cursor-pointer items-center justify-center rounded-full border border-amber-400/40 bg-amber-500/10 px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-100 shadow-[0_0_30px_rgba(251,191,36,0.12)] transition hover:border-amber-300/60 hover:bg-amber-500/20"
                 >
-                  Bientôt disponible
-                </span>
+                  Acheter
+                </a>
 
-                <Link
-                  href="/lecture"
-                  className="inline-flex w-full cursor-pointer items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/80 px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-zinc-200 transition hover:border-sky-400/40 hover:text-sky-100"
-                >
-                  Lire gratuitement
-                </Link>
+                <p className="mt-1 text-xs leading-relaxed text-zinc-600">
+                  Paiement sécurisé via{" "}
+                  <a
+                    href="https://stripe.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer text-zinc-500 underline-offset-2 hover:text-zinc-400 hover:underline"
+                  >
+                    Stripe
+                  </a>
+                  .
+                </p>
               </div>
             </div>
           </div>

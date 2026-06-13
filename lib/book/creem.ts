@@ -20,6 +20,11 @@ Au moins 99% de cet ouvrage a été produit sans IA
 
 Ecrit et illustré par Monsieur Pigeon`;
 
+/** Lien Stripe Payment Link — 1 exemplaire */
+export const STRIPE_BOOK_CHECKOUT_URL =
+  process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL?.trim() ||
+  "https://buy.stripe.com/cNidRabfkeHXdivd34cAo00";
+
 export const SINGLE_BOOK_OFFER: BookOffer = {
   quantity: 1,
   bonusQuantity: 0,
