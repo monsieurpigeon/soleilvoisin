@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Syne } from "next/font/google";
+import Link from "next/link";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -83,49 +83,6 @@ export default function Home() {
             Accéder au site
           </Link>
         </div>
-
-        <section
-          aria-labelledby="contact-heading"
-          className="mx-auto mt-20 max-w-md border-t border-zinc-800/80 pt-10"
-        >
-          <h2
-            id="contact-heading"
-            className="font-mono text-[0.65rem] font-medium uppercase tracking-[0.35em] text-zinc-500"
-          >
-            Contact
-          </h2>
-
-          <p className="mt-4 text-lg font-semibold text-zinc-200">Maxime PIGEON</p>
-
-          <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-            <li>
-              <a
-                href="mailto:maxpige@gmail.com"
-                className="cursor-pointer transition hover:text-sky-300"
-              >
-                maxpige@gmail.com
-              </a>
-            </li>
-            <li>
-              <a
-                href="tel:+33768888654"
-                className="cursor-pointer transition hover:text-sky-300"
-              >
-                07 68 88 86 54
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/maxime-pigeon/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer transition hover:text-sky-300"
-              >
-                LinkedIn
-              </a>
-            </li>
-          </ul>
-        </section>
       </div>
     </main>
   );

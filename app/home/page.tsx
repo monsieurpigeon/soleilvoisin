@@ -67,15 +67,62 @@ export default function HomePage() {
       <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col gap-8 sm:flex-row sm:items-start">
         <h1 className="sr-only">Soleil Voisin</h1>
 
-        <div className="mx-auto w-full max-w-xs shrink-0 overflow-hidden rounded-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:mx-0">
-          <Image
-            src="/couverture.png"
-            alt="Couverture du roman Soleil Voisin"
-            width={600}
-            height={900}
-            className="h-auto w-full"
-            priority
-          />
+        <div className="mx-auto flex w-full max-w-xs shrink-0 flex-col sm:mx-0">
+          <div className="overflow-hidden rounded-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
+            <Image
+              src="/couverture.png"
+              alt="Couverture du roman Soleil Voisin"
+              width={600}
+              height={900}
+              className="h-auto w-full"
+              priority
+            />
+          </div>
+
+          <section
+            aria-labelledby="contact-heading"
+            className="mt-6 border-t border-zinc-800/80 pt-6 text-center sm:text-left"
+          >
+            <h2
+              id="contact-heading"
+              className="font-mono text-[0.65rem] font-medium uppercase tracking-[0.35em] text-zinc-500"
+            >
+              Contact
+            </h2>
+
+            <p className="mt-3 text-base font-semibold text-zinc-200">
+              Monsieur Pigeon
+            </p>
+
+            <ul className="mt-3 space-y-1.5 text-sm text-zinc-400">
+              <li>
+                <a
+                  href="mailto:contact@soleilvoisin.fr"
+                  className="cursor-pointer transition hover:text-sky-300"
+                >
+                  contact@soleilvoisin.fr
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+33768888654"
+                  className="cursor-pointer transition hover:text-sky-300"
+                >
+                  07 68 88 86 54
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/maxime-pigeon/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer transition hover:text-sky-300"
+                >
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+          </section>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col">
