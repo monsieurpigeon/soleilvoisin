@@ -1,4 +1,5 @@
-import { OG_IMAGE, SITE_NAME } from "@/lib/site";
+import { OG_IMAGE, MONSIEUR_PIGEON_FACEBOOK_URL, SITE_NAME } from "@/lib/site";
+import { MonsieurPigeonLink } from "@/components/MonsieurPigeonLink";
 import type { Metadata } from "next";
 import { Syne } from "next/font/google";
 import Image from "next/image";
@@ -91,7 +92,7 @@ export default function HomePage() {
             </h2>
 
             <p className="mt-3 text-base font-semibold text-zinc-200">
-              Monsieur Pigeon
+              <MonsieurPigeonLink className="cursor-pointer transition hover:text-sky-300 hover:underline underline-offset-4" />
             </p>
 
             <ul className="mt-3 space-y-1.5 text-sm text-zinc-400">
@@ -121,6 +122,16 @@ export default function HomePage() {
                   LinkedIn
                 </a>
               </li>
+              <li>
+                <a
+                  href={MONSIEUR_PIGEON_FACEBOOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer transition hover:text-sky-300"
+                >
+                  Facebook
+                </a>
+              </li>
             </ul>
           </section>
         </div>
@@ -132,7 +143,7 @@ export default function HomePage() {
             Soleil Voisin
           </p>
           <p className="mt-2 text-center font-mono text-xs uppercase tracking-[0.25em] text-zinc-500 sm:text-left">
-            Monsieur Pigeon
+            <MonsieurPigeonLink className="cursor-pointer transition hover:text-sky-300" />
           </p>
 
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-zinc-400 sm:text-base">

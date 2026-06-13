@@ -1,5 +1,10 @@
 export const SITE_NAME = "Soleil Voisin";
 
+export const MONSIEUR_PIGEON_NAME = "Monsieur Pigeon";
+
+export const MONSIEUR_PIGEON_FACEBOOK_URL =
+  "https://www.facebook.com/mons.pigeon";
+
 export const OG_IMAGE_PATH = "/og-image.png";
 
 export const OG_IMAGE = {

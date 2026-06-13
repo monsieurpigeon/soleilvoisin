@@ -2,6 +2,7 @@ import {
   BOOK_SHOP_DESCRIPTION,
   SINGLE_BOOK_OFFER,
 } from "@/lib/book/creem";
+import { textWithMonsieurPigeonLink } from "@/components/MonsieurPigeonLink";
 import { OG_IMAGE, SITE_NAME } from "@/lib/site";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -81,7 +82,9 @@ export default function ShopPage() {
               </p>
               <div className="mt-4 space-y-4 text-sm leading-relaxed text-zinc-400 sm:text-base">
                 {BOOK_SHOP_DESCRIPTION.split("\n\n").map((paragraph) => (
-                  <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                  <p key={paragraph.slice(0, 32)}>
+                    {textWithMonsieurPigeonLink(paragraph)}
+                  </p>
                 ))}
               </div>
             </div>

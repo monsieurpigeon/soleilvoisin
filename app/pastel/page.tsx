@@ -1,4 +1,6 @@
 import { getPastelGalerie, type PastelPainting } from "@/lib/pastel/galerie";
+import { MonsieurPigeonLink } from "@/components/MonsieurPigeonLink";
+import { MONSIEUR_PIGEON_NAME } from "@/lib/site";
 import type { Metadata } from "next";
 import { Syne } from "next/font/google";
 import Image from "next/image";
@@ -21,7 +23,11 @@ function PastelPaintingText({ painting }: { painting: PastelPainting }) {
         {painting.title}
       </h2>
       <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-zinc-500">
-        {painting.artist}
+        {painting.artist === MONSIEUR_PIGEON_NAME ? (
+          <MonsieurPigeonLink className="cursor-pointer transition hover:text-sky-300" />
+        ) : (
+          painting.artist
+        )}
         {painting.date ? (
           <span className="text-zinc-600"> · {painting.date}</span>
         ) : null}
