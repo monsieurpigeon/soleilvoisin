@@ -3,6 +3,7 @@ import { getSiteUrl, SITE_NAME } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 
@@ -45,7 +46,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full min-h-svh flex flex-col bg-[#030510] text-zinc-100">
-        <FBPixel />
+        <Suspense fallback={null}>
+          <FBPixel />
+        </Suspense>
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
